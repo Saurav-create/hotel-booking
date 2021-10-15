@@ -1,25 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
 import {
-    Card, CardImg, CardBody,
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
 } from 'reactstrap';
+import { connect } from "react-redux";
+import { trySubmit } from "../redux/actionCreators";
 
 
-const Cardpic = (props) => {
+const mapDispatchToProps = dispatch =>{
+    return{
+        trySubmit: ()=>dispatch(trySubmit())
+    }
+}
+
+
+class Cardpic extends Component {
+    render(){
     return (
         <div>
-            <Card style={{padding: "10px", margin: "10px", marginLeft:"27%" }}>
-                <CardImg top width="60%" src={props.src} alt="Card image cap" style={{
-                    border: "5px solid black",
-                    borderRadius: "5px",
-                    
-                }} />
+            <Card>
+                <CardImg top width="30%" src={this.props.src} alt="Card image cap" />
                 <CardBody>
-                  {props.details}
+                    <CardTitle tag="h5">{this.props.details}</CardTitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
+                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                    <Button onClick={this.props.trySubmit}>Button</Button>
                 </CardBody>
-                
             </Card>
         </div>
     );
 }
+}
 
-export default Cardpic;
+
+export default connect(null,mapDispatchToProps)(Cardpic);

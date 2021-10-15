@@ -1,0 +1,64 @@
+.Navigation {
+    margin-bottom: 20px;
+}
+
+.Brand{
+    color: white;
+    font-size: 15px;
+    margin-top: -20px;
+}
+
+.button:hover{
+   background-color: brown;
+}
+
+.NavLink {
+    text-decoration: none;
+    color: rgb(208, 255, 0);
+    font-size: 25px;
+    margin-top: -25px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.NavLink:hover {
+    color: #a2b223;
+    text-decoration: none;
+}
+
+.active {
+    text-shadow: 1px 1px grey;
+    color: wheat;
+}
+
+@media screen and (max-width: 480px) {
+    .Navigation {
+        margin-bottom: 20px;
+    }
+    
+    .Brand{
+        color: wheat;
+        font-size: 8px;
+        margin-top: -20px;
+    }
+    
+    .NavLink {
+        text-decoration: none;
+        color: wheat;
+        font-size: 15px;
+        margin-top: -15px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    
+    .NavLink:hover {
+        color: rgb(209, 245, 7);
+        text-decoration: none;
+    }
+    
+    .active {
+        text-shadow: 1px 1px grey;
+        color: wheat;
+    }
+    
+  }
