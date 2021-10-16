@@ -16,6 +16,7 @@ import Form from "./form";
 const mapStateToProps = state =>{
     return{
         isOpen: state.isOpen,
+        roomCount: state.roomCount,
     }
 }
 
@@ -38,16 +39,16 @@ class Homepage extends Component {
                         <Row> {CaroHeader}</Row>
                         <Row>
                             <Col md="3">
-                                <Cardpic src={premium} details="Premium Bed for 2 person" />
+                                <Cardpic src={premium} details="Premium Bed for 2 person" roomCount={this.props.roomCount.premium} roomType="premium" />
                             </Col>
                             <Col md="3">
-                                <Cardpic src={regular} details="Regular Bed for 2 person" />
+                                <Cardpic src={regular} details="Regular Bed for 2 person" roomCount={this.props.roomCount.regular} roomType="regular" />
                             </Col>
                             <Col md="3">
-                                <Cardpic src={single} details="Single Bed 1 person" />
+                                <Cardpic src={single} details="Single Bed 1 person" roomCount={this.props.roomCount.single} roomType="single" />
                             </Col>
                             <Col xs="3">
-                                <Cardpic src={Two} details="Two Single Bed for 2 person" />
+                                <Cardpic src={Two} details="Two Single Bed for 2 person" roomCount={this.props.roomCount.two} roomType="two" />
                             </Col>
                         </Row>
                     </Container>

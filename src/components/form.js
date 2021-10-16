@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 import axios from 'axios';
 import { connect } from "react-redux";
-import { Button} from 'reactstrap';
 import Spinner from "./Spinner/Spinner";
-import {dataSubmit} from '../redux/actionCreators';
+import {dataSubmit,roomCount,reduce} from '../redux/actionCreators';
 
 
 
@@ -12,7 +11,9 @@ import {dataSubmit} from '../redux/actionCreators';
 
 const mapDispatchToProps = dispatch =>{
     return{
-        dataSubmit: ()=>dispatch(dataSubmit())
+        dataSubmit: ()=>dispatch(dataSubmit()),
+        roomCount: (roomType)=>dispatch(roomCount(roomType)),
+        reduce: ()=>dispatch(reduce()),
     }
 }
 
@@ -59,6 +60,8 @@ class Form extends Component {
                                         alert("Feedback Submitted Successfully");
                                         console.log(feedback);
                                        this.props.dataSubmit();
+                                       this.props.reduce();
+                                    //    this.props.roomCount();
                                     }
                                     else {
                                         this.setState({
@@ -81,6 +84,9 @@ class Form extends Component {
 
                         }
                     }
+
+
+                    
 
                 >
 
@@ -114,7 +120,7 @@ class Form extends Component {
                             />
 
                             <br />
-                            <label>Feedback</label>
+                            <label>Phone</label>
                             <input
                                 name="phone"
                                 placeholder="Phone Number"

@@ -52,7 +52,7 @@ export const auth = (email, password, mode) => dispatch => {
             localStorage.setItem('expirationTime', expirationTime);
         }
         )
-        .catch(err=> {
+        .catch(err => {
             alert(`${err.response.data.error.message}`);
         })
 
@@ -66,12 +66,12 @@ export const authCheck = () => dispatch => {
     const token = localStorage.getItem('token');
     if (!token) {
         // Logout
-         dispatch(Logout());
+        dispatch(Logout());
     } else {
         const expirationTime = new Date(localStorage.getItem('expirationTime'));
         if (expirationTime <= new Date()) {
             // Logout
-             dispatch(Logout());
+            dispatch(Logout());
         } else {
             const userId = localStorage.getItem('userId');
             dispatch(authSuccess(token, userId));
@@ -91,15 +91,45 @@ export const Logout = () => {
 
 
 
-export const dataSubmit = () =>{
-    return{
-        type:actionTypes.DATA_SUBMIT
+export const dataSubmit = () => {
+    return {
+        type: actionTypes.DATA_SUBMIT
     }
 }
 
-export const trySubmit =()=>{
+export const trySubmit = () => {
 
-    return{
-        type:actionTypes.TRY_SUBMIT,
+    return {
+        type: actionTypes.TRY_SUBMIT,
+    }
+}
+
+
+export const roomCount = (props) => {
+
+    return {
+        type: actionTypes.ROOM_COUNT,
+        payload: props.roomType,
+    }
+}
+
+
+export const getRoomCount = (props) => {
+    return {
+        type: actionTypes.GET_ROOM_COUNT,
+
+    }
+}
+
+export const changeRoomState = (props) => {
+    return {
+        type: actionTypes.CHANGE_ROOM_STATE,
+        payload: props,
+    }
+}
+
+export const reduce = () => {
+    return {
+        type: actionTypes.REDUCE,
     }
 }

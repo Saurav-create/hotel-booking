@@ -4,3 +4,7 @@ export const AUTH_LOADING = "AUTH_LOADING";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const TRY_SUBMIT = "TRY_SUBMIT";
 export const DATA_SUBMIT = "DATA_SUBMIT";
+export const ROOM_COUNT = "ROOM_COUNT";
+export const GET_ROOM_COUNT = "GET_ROOM_COUNT";
+export const CHANGE_ROOM_STATE = "CHANGE_ROOM_STATE";
+export const REDUCE = "REDUCE";
