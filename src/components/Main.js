@@ -4,7 +4,7 @@ import Header from "./Header/Header";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginNew from './Login';
 import { connect } from "react-redux";
-import { authCheck } from "../redux/actionCreators";
+import { authCheck, updateRoomData } from "../redux/actionCreators";
 import NewCaro from "./NewCaro";
 
 
@@ -17,6 +17,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         authCheck: () => dispatch(authCheck()),
+        updateRoomData: () => dispatch(updateRoomData()),
     }
 }
 
@@ -24,6 +25,7 @@ class Main extends Component {
 
     componentDidMount() {
         this.props.authCheck();
+        this.props.updateRoomData();
     }
 
 

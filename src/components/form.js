@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import axios from 'axios';
 import { connect } from "react-redux";
 import Spinner from "./Spinner/Spinner";
-import {dataSubmit,roomCount,reduce} from '../redux/actionCreators';
+import {dataSubmit,roomCount,reduce, putRoomData} from '../redux/actionCreators';
 
 
 
@@ -14,6 +14,12 @@ const mapDispatchToProps = dispatch =>{
         dataSubmit: ()=>dispatch(dataSubmit()),
         roomCount: (roomType)=>dispatch(roomCount(roomType)),
         reduce: ()=>dispatch(reduce()),
+        putRoomData: ()=>dispatch(putRoomData()),
+    }
+}
+const mapStateToProps = state =>{
+    return{
+        roomData: state.roomCount,
     }
 }
 
@@ -49,6 +55,7 @@ class Form extends Component {
                                 isLoading: true,
                             })
                             const feedback = { values };
+                            
 
                             if(feedback.values.phone!= "" && feedback.values.name!=""){
                                 axios.post('https://hotel-booking-a373a-default-rtdb.firebaseio.com/feedback.json', feedback)
@@ -58,10 +65,14 @@ class Form extends Component {
                                             isLoading: false,
                                         });
                                         alert("Feedback Submitted Successfully");
-                                        console.log(feedback);
+                                        
                                        this.props.dataSubmit();
                                        this.props.reduce();
+                                       this.props.putRoomData();
                                     //    this.props.roomCount();
+                                    
+
+                                    
                                     }
                                     else {
                                         this.setState({
@@ -69,7 +80,7 @@ class Form extends Component {
                                         });
                                     }
                                 })
-                                .then(err => console.log(err));
+                                
 
                             }
                             else{
@@ -159,4 +170,4 @@ class Form extends Component {
     }
 }
 
-export default connect(null,mapDispatchToProps)(Form);
+export default connect(mapStateToProps,mapDispatchToProps)(Form);

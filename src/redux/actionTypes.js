@@ -8,3 +8,5 @@ export const ROOM_COUNT = "ROOM_COUNT";
 export const GET_ROOM_COUNT = "GET_ROOM_COUNT";
 export const CHANGE_ROOM_STATE = "CHANGE_ROOM_STATE";
 export const REDUCE = "REDUCE";
+export const PUT_ROOM_DATA ="PUT_ROOM_DATA";
+export const UPDATE_ROOM_DATA = "UPDATE_ROOM_DATA";

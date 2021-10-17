@@ -133,3 +133,15 @@ export const reduce = () => {
         type: actionTypes.REDUCE,
     }
 }
+
+
+export const putRoomData =()=>{
+    return{
+        type: actionTypes.PUT_ROOM_DATA,
+    }
+}
+export const updateRoomData =()=>{
+    return{
+        type: actionTypes.UPDATE_ROOM_DATA,
+    }
+}
