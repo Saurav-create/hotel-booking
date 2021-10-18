@@ -8,6 +8,9 @@ import { Container, Row, Col, Modal, ModalBody } from 'reactstrap';
 import CaroHeader from './CaroHeader';
 import { connect } from "react-redux";
 import Form from "./form";
+import axios from "axios";
+import { newUpdateRoomData } from "../redux/actionCreators";
+
 
 
 
@@ -20,11 +23,23 @@ const mapStateToProps = state =>{
     }
 }
 
+const mapDispatchToProps= dispatch =>{
+    return{
+        newUpdateRoomData: (upData)=>dispatch(newUpdateRoomData(upData)),
+    }
+}
+
+
+
 
 
 
 class Homepage extends Component {
+
+   
     render(){
+//     
+       
         return (
             <div>
                 <div style={{
@@ -65,4 +80,4 @@ class Homepage extends Component {
 }
 
 
-export default connect(mapStateToProps)(Homepage);
+export default connect(mapStateToProps,mapDispatchToProps)(Homepage);

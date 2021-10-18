@@ -4,14 +4,14 @@ import {
     CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 import { connect } from "react-redux";
-import { trySubmit,changeRoomState, multiple } from "../redux/actionCreators";
+import { trySubmit,changeRoomState} from "../redux/actionCreators";
 
 
 const mapDispatchToProps = dispatch =>{
     return{
-        trySubmit: ()=>dispatch(trySubmit()),
+        trySubmit: (props)=>dispatch(trySubmit(props)),
         changeRoomState: (roomType)=>dispatch(changeRoomState(roomType)),
-    //    multiple: (roomType)=>dispatch(multiple(roomType)),
+   
     }
 }
 
@@ -29,7 +29,7 @@ class Cardpic extends Component {
                     <CardTitle tag="h5">{this.props.details}</CardTitle>
                     <CardSubtitle tag="h6" className="mb-2 text-muted">Room left : {this.props.roomCount}</CardSubtitle>
                     <CardText></CardText>
-                    <Button onClick={()=>{this.props.trySubmit() ; this.props.changeRoomState(this.props.roomType) }}>Book This Room</Button>
+                    <Button onClick={()=>{this.props.trySubmit(this.props.roomType) ; this.props.changeRoomState(this.props.roomType) }}>Book This Room</Button>
                 </CardBody>
             </Card>
         </div>

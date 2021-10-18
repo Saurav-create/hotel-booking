@@ -4,28 +4,38 @@ import Header from "./Header/Header";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import LoginNew from './Login';
 import { connect } from "react-redux";
-import { authCheck, updateRoomData } from "../redux/actionCreators";
-import NewCaro from "./NewCaro";
+import { authCheck ,newUpdateRoomData} from "../redux/actionCreators";
+import axios from "axios";
 
 
 
 const mapStateToProps = state => {
     return {
         token: state.token,
+        roomCount: state.roomCount,
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         authCheck: () => dispatch(authCheck()),
-        updateRoomData: () => dispatch(updateRoomData()),
+        newUpdateRoomData: (upData)=>dispatch(newUpdateRoomData(upData)),
+        
     }
 }
 
 class Main extends Component {
 
     componentDidMount() {
+        axios.get('https://hotel-booking-a373a-default-rtdb.firebaseio.com/roomData.json')
+                 .then(response=>{
+                     let upData = response.data;
+                  this.props.newUpdateRoomData(upData);
+                   
+                 })
         this.props.authCheck();
-        this.props.updateRoomData();
+  
+        
+
     }
 
 

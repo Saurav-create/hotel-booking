@@ -2,10 +2,13 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 
+
+
 const initialState = {
     token: null,
     userId: null,
     isOpen: false,
+    isUpNow: true,
     roomState: "",
     roomCount: {
         premium: 5,
@@ -18,7 +21,10 @@ const initialState = {
 
 
 export const reducer = (state = initialState, action) => {
-    console.log(state);
+
+
+
+
 
     switch (action.type) {
         case actionTypes.AUTH_SUCCESS:
@@ -34,9 +40,21 @@ export const reducer = (state = initialState, action) => {
                 userId: null,
             }
         case actionTypes.TRY_SUBMIT:
-            return {
-                ...state,
-                isOpen: true
+            {
+                
+                if(state.roomCount[action.payload] === 0){
+                    return {
+                        ...state,
+                        isOpen: false,
+                    }
+                }
+                else{
+                    return{
+                        ...state,
+                        isOpen:true,
+                    }
+                }
+              
             }
         case actionTypes.DATA_SUBMIT:
             return {
@@ -44,6 +62,11 @@ export const reducer = (state = initialState, action) => {
                 isOpen: false
             }
         case actionTypes.CHANGE_ROOM_STATE:
+
+
+        if(state.roomCount[action.payload] === 0){
+            alert("No rooms availble");
+        }
 
             return {
                 ...state,
@@ -65,7 +88,9 @@ export const reducer = (state = initialState, action) => {
             }
             else {
                 alert("No Rooms Available");
-
+                return {
+                    ...state,
+                }
             }
         case actionTypes.ROOM_COUNT:
 
@@ -81,22 +106,32 @@ export const reducer = (state = initialState, action) => {
                 let roomData = {
                     ...state.roomCount,
                 }
-                console.log(roomData);
+
                 axios.put('https://hotel-booking-a373a-default-rtdb.firebaseio.com/roomData.json', roomData)
-                    .then(response => console.log(response.data))
+                    .then(response => response.data)
                     .catch(err => {
                         alert(`${err.response.data.error.message}`);
                     })
-            }
-        case actionTypes.UPDATE_ROOM_DATA:
-            {
 
-                let resData = null;
-                axios.get('https://hotel-booking-a373a-default-rtdb.firebaseio.com/roomData.json')
-                    .then(response => {
-                        resData = response.data
-                    })
+                    return{
+                        ...state,
+                        isUpNow:false,
+                    }
             }
+       
+        case actionTypes.NEW_UPDATE_ROOM_DATA:
+            {
+            
+               if(state.isUpNow === true){
+                return {
+                    ...state,
+                    roomCount: action.payload,
+
+                }
+               }
+               
+            }
+
 
         default:
             return state;

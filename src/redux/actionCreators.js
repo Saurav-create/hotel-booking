@@ -29,16 +29,16 @@ export const auth = (email, password, mode) => dispatch => {
     }
 
 
-    console.log(authData, mode);
+   
 
     let API_URL = "";
     if (mode === "login") {
         API_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
-        console.log("login");
+       
     }
     else {
         API_URL = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=';
-        console.log("signup");
+        
     }
 
     let API_KEY = 'AIzaSyBpZDnQvX_FnIAjT8ZXKP79Ue66G-KjTeU';
@@ -97,10 +97,12 @@ export const dataSubmit = () => {
     }
 }
 
-export const trySubmit = () => {
+export const trySubmit = (props) => {
+  
 
     return {
         type: actionTypes.TRY_SUBMIT,
+        payload: props,
     }
 }
 
@@ -140,8 +142,13 @@ export const putRoomData =()=>{
         type: actionTypes.PUT_ROOM_DATA,
     }
 }
-export const updateRoomData =()=>{
+
+export const newUpdateRoomData =(props)=>{
+   
+
     return{
-        type: actionTypes.UPDATE_ROOM_DATA,
+        type: actionTypes.NEW_UPDATE_ROOM_DATA,
+        payload: props,
+
     }
 }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-import { auth } from "../redux/actionCreators";
+import { auth, newUpdateRoomData } from "../redux/actionCreators";
 import { connect } from "react-redux";
+import axios from "axios";
 
 
 
@@ -11,7 +12,8 @@ import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch =>{
     return{
-        auth: (email,password,mode)=> dispatch(auth(email,password,mode)) 
+        auth: (email,password,mode)=> dispatch(auth(email,password,mode)) ,
+        newUpdateRoomData: (upData)=>dispatch(newUpdateRoomData(upData)),
     }
 }
 
@@ -19,6 +21,16 @@ const mapDispatchToProps = dispatch =>{
 
 
 class LoginNew extends Component {
+    
+    componentDidMount() {
+        axios.get('https://hotel-booking-a373a-default-rtdb.firebaseio.com/roomData.json')
+                 .then(response=>{
+                     let upData = response.data;
+                  this.props.newUpdateRoomData(upData);
+                   
+                 })
+  
+    }
 
     state = {
         mode: "login"
@@ -156,7 +168,7 @@ class LoginNew extends Component {
 
                     onSubmit={
                         (values) => {
-                            console.log(values);
+                            
                             this.props.auth(values.email,values.password,this.state.mode);
                         }
                     }

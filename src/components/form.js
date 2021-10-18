@@ -69,7 +69,7 @@ class Form extends Component {
                                        this.props.dataSubmit();
                                        this.props.reduce();
                                        this.props.putRoomData();
-                                    //    this.props.roomCount();
+                                    
                                     
 
                                     
